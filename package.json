@@ -1,7 +1,7 @@
 {
-  "name": "babel-plugin-amazed",
+  "name": "babel-plugin-mettle",
   "description": "A Babel plugin that compiles the template string in amazed.js into a normal object.",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "main": "dist/babel-plugin-amazed.js",
   "module": "dist/babel-plugin-amazed.mjs",
   "scripts": {
