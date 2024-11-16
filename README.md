@@ -1,4 +1,4 @@
-# babel-plugin-amazed
+# Babel-plugin-amazed
 
 A Babel plugin that compiles the template string in amazed.js into a normal object.
 
