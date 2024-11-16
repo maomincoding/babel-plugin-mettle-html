@@ -1,15 +1,15 @@
-import { treeify, build } from "./compile.js";
+import { treeify, build } from './compile.js';
 /**
  * @param {Babel} babel
  * @param {object} options
  * @param {string} [options.tag=html]  The tagged template "tag" function name to process.
  */
 
-export default function strveBabelPlugin({ types: t }, options = {}) {
+export default function amazedBabelPlugin({ types: t }, options = {}) {
   function patternStringToRegExp(str) {
-    const parts = str.split("/").slice(1);
-    const end = parts.pop() || "";
-    return new RegExp(parts.join("/"), end);
+    const parts = str.split('/').slice(1);
+    const end = parts.pop() || '';
+    return new RegExp(parts.join('/'), end);
   }
 
   function propertyName(key) {
@@ -27,16 +27,12 @@ export default function strveBabelPlugin({ types: t }, options = {}) {
       });
       let node = values[0];
 
-      if (
-        values.length > 1 &&
-        !t.isStringLiteral(node) &&
-        !t.isStringLiteral(values[1])
-      ) {
-        node = t.binaryExpression("+", t.stringLiteral(""), node);
+      if (values.length > 1 && !t.isStringLiteral(node) && !t.isStringLiteral(values[1])) {
+        node = t.binaryExpression('+', t.stringLiteral(''), node);
       }
 
       values.slice(1).forEach(function (value) {
-        node = t.binaryExpression("+", node, value);
+        node = t.binaryExpression('+', node, value);
       });
       return t.objectProperty(propertyName(key), node);
     });
@@ -56,9 +52,9 @@ export default function strveBabelPlugin({ types: t }, options = {}) {
     let key = null;
     if (props && props.properties && Array.isArray(props.properties)) {
       props.properties.forEach((item) => {
-        if (item.key.type === "StringLiteral" && item.key.value === "key") {
+        if (item.key.type === 'StringLiteral' && item.key.value === 'key') {
           key = item.value;
-        } else if (item.key.type === "Identifier" && item.key.name === "key") {
+        } else if (item.key.type === 'Identifier' && item.key.name === 'key') {
           key = item.value;
         } else {
           key = t.nullLiteral();
@@ -71,11 +67,11 @@ export default function strveBabelPlugin({ types: t }, options = {}) {
     return t.objectExpression(
       [
         false,
-        t.objectProperty(propertyName("tag"), tag),
-        t.objectProperty(propertyName("props"), props),
-        t.objectProperty(propertyName("children"), children),
-        t.objectProperty(propertyName("key"), key),
-        t.objectProperty(propertyName("el"), t.nullLiteral()),
+        t.objectProperty(propertyName('tag'), tag),
+        t.objectProperty(propertyName('props'), props),
+        t.objectProperty(propertyName('children'), children),
+        t.objectProperty(propertyName('key'), key),
+        t.objectProperty(propertyName('el'), t.nullLiteral()),
         false,
       ].filter(Boolean)
     );
@@ -94,54 +90,42 @@ export default function strveBabelPlugin({ types: t }, options = {}) {
       return propsNode(args[0]);
     } // 'Object.assign({}, x)', can be collapsed to 'x'.
 
-    if (
-      args.length === 2 &&
-      !t.isNode(args[0]) &&
-      Object.keys(args[0]).length === 0
-    ) {
+    if (args.length === 2 && !t.isNode(args[0]) && Object.keys(args[0]).length === 0) {
       return propsNode(args[1]);
     }
 
-    const helper = state.addHelper("extends");
+    const helper = state.addHelper('extends');
     return t.callExpression(helper, args.map(propsNode));
   }
 
   function propsNode(props) {
-    return t.isNode(props)
-      ? props
-      : t.objectExpression(objectProperties(props));
+    return t.isNode(props) ? props : t.objectExpression(objectProperties(props));
   }
 
   function transform(node, state) {
     if (t.isNode(node)) {
       return node;
     }
-    if (typeof node === "string") {
+    if (typeof node === 'string') {
       return stringValue(node);
     }
-    if (typeof node === "undefined") {
-      return t.identifier("undefined");
+    if (typeof node === 'undefined') {
+      return t.identifier('undefined');
     }
     const { tag, props, children } = node;
-    const newTag = typeof tag === "string" ? t.stringLiteral(tag) : tag;
+    const newTag = typeof tag === 'string' ? t.stringLiteral(tag) : tag;
     const newProps = spreadNode(props, state);
-    const newChildren = t.arrayExpression(
-      children.map((child) => transform(child, state))
-    );
+    const newChildren = t.arrayExpression(children.map((child) => transform(child, state)));
     return createVNode(newTag, newProps, newChildren);
   }
 
-  const tagName = options.tag || "html";
+  const tagName = options.tag || 'html';
   return {
-    name: "strve",
+    name: 'amazed',
     visitor: {
       TaggedTemplateExpression(path, state) {
         const tag = path.node.tag.name;
-        if (
-          tagName[0] === "/"
-            ? patternStringToRegExp(tagName).test(tag)
-            : tag === tagName
-        ) {
+        if (tagName[0] === '/' ? patternStringToRegExp(tagName).test(tag) : tag === tagName) {
           const statics = path.node.quasi.quasis.map((e) => e.value.raw);
           const expr = path.node.quasi.expressions;
           const tree = treeify(build(statics), expr);
@@ -156,7 +140,7 @@ export default function strveBabelPlugin({ types: t }, options = {}) {
         const args = path.node.arguments;
         const argsArr = Array.from(args);
         // The parameter is a template string
-        if (callee.name === "tem_h") {
+        if (callee.name === 'tem_h') {
           const statics = argsArr[0].quasis.map((e) => e.value.raw);
           const expr = argsArr[0].expressions;
           const tree = treeify(build(statics), expr);
@@ -166,7 +150,7 @@ export default function strveBabelPlugin({ types: t }, options = {}) {
           path.replaceWith(node);
         }
         // The parameter is a regular string
-        else if (callee.name === "str_h") {
+        else if (callee.name === 'str_h') {
           const statics = argsArr[0].extra.rawValue;
           const tree = treeify(build([statics]), []);
           const node = !Array.isArray(tree)

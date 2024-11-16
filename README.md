@@ -1,6 +1,6 @@
-# babel-plugin-strve
+# babel-plugin-amazed
 
-A Babel plugin that compiles the template string in Strve.js into a normal object.
+A Babel plugin that compiles the template string in amazed.js into a normal object.
 
 ## Usage
 
@@ -9,7 +9,7 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `"babel"` field in p
 ```js
 {
   "plugins": [
-    ["babel-plugin-strve"]
+    ["babel-plugin-amazed"]
   ]
 }
 ```
@@ -18,11 +18,11 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `"babel"` field in p
 
 #### `tag=html`
 
-By default, `babel-plugin-strve` will process all Tagged Templates with a tag function named `html`. To use a different name, use the `tag` option in your Babel configuration:
+By default, `babel-plugin-amazed` will process all Tagged Templates with a tag function named `html`. To use a different name, use the `tag` option in your Babel configuration:
 
 ```js
 {"plugins":[
-  ["babel-plugin-strve", {
+  ["babel-plugin-amazed", {
     "tag": "html"
   }]
 ]}
@@ -41,7 +41,7 @@ tem_h(`<p>hello</p>`);
 2. The function name is `str_h`, and the parameters are ordinary strings.
 
 ```js
-str_h("<p>hello</p>");
+str_h('<p>hello</p>');
 ```
 
 > Whether you choose the default mode or call the expression mode, their final output structure is the same. In addition, these modes we can use at the same time.
