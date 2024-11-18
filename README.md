@@ -1,6 +1,6 @@
-# Babel-plugin-amazed
+# Babel-plugin-mettle
 
-A Babel plugin that compiles the template string in amazed.js into a normal object.
+A Babel plugin that compiles the template string in mettle.js into a normal object.
 
 ## Usage
 
@@ -9,7 +9,7 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `"babel"` field in p
 ```js
 {
   "plugins": [
-    ["babel-plugin-amazed"]
+    ["babel-plugin-mettle"]
   ]
 }
 ```
@@ -18,11 +18,11 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `"babel"` field in p
 
 #### `tag=html`
 
-By default, `babel-plugin-amazed` will process all Tagged Templates with a tag function named `html`. To use a different name, use the `tag` option in your Babel configuration:
+By default, `babel-plugin-mettle` will process all Tagged Templates with a tag function named `html`. To use a different name, use the `tag` option in your Babel configuration:
 
 ```js
 {"plugins":[
-  ["babel-plugin-amazed", {
+  ["babel-plugin-mettle", {
     "tag": "html"
   }]
 ]}

@@ -148,7 +148,7 @@ const build = function (statics) {
  * @param {string} [options.tag=html]  The tagged template "tag" function name to process.
  */
 
-function amazedBabelPlugin({
+function mettleBabelPlugin({
   types: t
 }, options = {}) {
   function patternStringToRegExp(str) {
@@ -245,7 +245,7 @@ function amazedBabelPlugin({
   }
   const tagName = options.tag || 'html';
   return {
-    name: 'amazed',
+    name: 'mettle',
     visitor: {
       TaggedTemplateExpression(path, state) {
         const tag = path.node.tag.name;
@@ -281,4 +281,4 @@ function amazedBabelPlugin({
   };
 }
 
-export { amazedBabelPlugin as default };
+export { mettleBabelPlugin as default };

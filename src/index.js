@@ -5,7 +5,7 @@ import { treeify, build } from './compile.js';
  * @param {string} [options.tag=html]  The tagged template "tag" function name to process.
  */
 
-export default function amazedBabelPlugin({ types: t }, options = {}) {
+export default function mettleBabelPlugin({ types: t }, options = {}) {
   function patternStringToRegExp(str) {
     const parts = str.split('/').slice(1);
     const end = parts.pop() || '';
@@ -121,7 +121,7 @@ export default function amazedBabelPlugin({ types: t }, options = {}) {
 
   const tagName = options.tag || 'html';
   return {
-    name: 'amazed',
+    name: 'mettle',
     visitor: {
       TaggedTemplateExpression(path, state) {
         const tag = path.node.tag.name;
