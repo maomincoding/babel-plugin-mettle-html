@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-mettle",
   "description": "A Babel plugin that compiles the template string in mettle.js into a normal object.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "dist/babel-plugin-mettle.js",
   "module": "dist/babel-plugin-mettle.mjs",
   "scripts": {

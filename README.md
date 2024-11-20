@@ -18,7 +18,7 @@ In your Babel configuration (`.babelrc`, `babel.config.js`, `"babel"` field in p
 
 #### `tag=html`
 
-By default, `babel-plugin-mettle` will process all Tagged Templates with a tag function named `html`. To use a different name, use the `tag` option in your Babel configuration:
+By default, `babelPluginMettle` will process all Tagged Templates with a tag function named `html`. To use a different name, use the `tag` option in your Babel configuration:
 
 ```js
 {"plugins":[
