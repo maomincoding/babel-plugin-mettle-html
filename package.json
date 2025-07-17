@@ -1,9 +1,9 @@
 {
-  "name": "babel-plugin-mettle",
+  "name": "babel-plugin-mettle-html",
   "description": "A Babel plugin that compiles the template string in mettle.js into a normal object.",
-  "version": "0.1.2",
-  "main": "dist/babel-plugin-mettle.js",
-  "module": "dist/babel-plugin-mettle.mjs",
+  "version": "0.1.0",
+  "main": "dist/babel-plugin-mettle-html.js",
+  "module": "dist/babel-plugin-mettle-html.mjs",
   "scripts": {
     "build": "microbundle src/index.js -f es,cjs --target node --no-compress --no-sourcemap"
   },
@@ -12,12 +12,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/maomincoding/babel-plugin-mettle"
+    "url": "https://github.com/maomincoding/babel-plugin-mettle-html"
   },
   "bugs": {
-    "url": "https://github.com/maomincoding/babel-plugin-mettle/issues"
+    "url": "https://github.com/maomincoding/babel-plugin-mettle-html/issues"
   },
-  "homepage": "https://github.com/maomincoding/babel-plugin-mettle#readme",
+  "homepage": "https://github.com/maomincoding/babel-plugin-mettle-html#readme",
   "keywords": [
     "Hyperscript Tagged Markup",
     "tagged template",
@@ -29,7 +29,7 @@
     "babel-plugin",
     "mettle",
     "mettle-js",
-    "babel-plugin-mettle"
+    "babel-plugin-mettle-html"
   ],
   "author": "maomincoding",
   "license": "MIT",
